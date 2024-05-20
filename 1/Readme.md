@@ -1,0 +1,2 @@
+You're correct in understanding that you need to address the variable pointed to by a pointer to modify its value, not the pointer itself. 
+Pointer cuman variabel penunjuk klo gaada yg ditunjuk ya gabisa ngapa2in njirt 

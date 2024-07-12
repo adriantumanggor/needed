@@ -10,12 +10,12 @@ typedef struct siswa
 } siswa;
 
 struct siswa Data[10];
-int size = 10;
+int size;
 
 void isiData();
 void cetakData();
-int menuPengurutan();
-int modeUrut();
+int menu();
+int mode();
 int jenisUrut();
 void insertionSort(int, int);
 void selectionSort(int, int);
@@ -29,39 +29,23 @@ int comparator(struct siswa, struct siswa, int, int);
 int main()
 {
     isiData();
-    int pilihan_pengurutan, mode, berdasarkan;
+    int pilihan, bentukdata;
 
     do
     {
-        pilihan_pengurutan = menuPengurutan();
+        pilihan = menu();
 
-        if (pilihan_pengurutan == 7)
+        if (pilihan == 3)
             break;
 
-        mode = modeUrut();
+        bentukdata = mode();
 
-        berdasarkan = jenisUrut();
-
-        urutkan(pilihan_pengurutan, mode, berdasarkan);
+        urutkan(pilihan, bentukdata);
 
         cetakData();
     } while (1);
 
     return 0;
-}
-
-int jenisUrut()
-{
-    int pilihan;
-
-    printf("\nUrutkan Berdasarkan\n");
-    printf("1. No\n");
-    printf("2. Nama\n");
-    printf("3. Nilai\n");
-    printf("Pilihan : ");
-    scanf("%d", &pilihan);
-
-    return pilihan;
 }
 
 void urutkan(int pilihan, int mode, int berdasarkan)
@@ -75,24 +59,19 @@ void urutkan(int pilihan, int mode, int berdasarkan)
         selectionSort(mode, berdasarkan);
         break;
     case 3:
-        bubbleSort(mode, berdasarkan);
-        break;
-    case 4:
-        shellSort(mode, berdasarkan);
-        break;
-    case 5:
-        mergeSort(Data, 0, size - 1, berdasarkan, mode);
-        break;
-    case 6:
-        quickSort(Data, 0, size - 1, berdasarkan, mode);
-        break;
-    default:
         exit(0);
+    default:
+        break;
     }
 }
 
 void isiData()
 {
+    printf("Enter the number of students: ");
+    scanf("%d", &size);
+
+    Data = (siswa *)malloc(size * sizeof(siswa));
+
     for (int i = 0; i < size; i++)
     {
         printf("Masukkan data siswa ke-%d\n", i + 1);
@@ -120,31 +99,27 @@ void cetakData()
     }
 }
 
-int menuPengurutan()
+int menu()
 {
     int pilihan;
 
-    printf("\nMENU METODE SORTING\n");
-    printf("1. Insertion Sort\n");
-    printf("2. Selection Sort\n");
-    printf("3. Bubble sort\n");
-    printf("4. Shell sort\n");
-    printf("5. Merge Sort\n");
-    printf("6. Quick Sort\n");
-    printf("7. Keluar\n");
+    printf("\nMenu Search\n");
+    printf("1. Tampilkan data\n");
+    printf("2. Sequential search\n");
+    printf("3. Keluar\n");
     printf("Pilihan : ");
     scanf("%d", &pilihan);
 
     return pilihan;
 }
 
-int modeUrut()
+int mode()
 {
     int pilihan;
 
-    printf("Pengurutan yang dipilih:\n");
-    printf("1. Ascending\n");
-    printf("2. Descending\n");
+    printf("Bentuk data:\n");
+    printf("1. tidak terurut\n");
+    printf("2. Terurut berdasarkan no\n");
     printf("Pilihan : ");
     scanf("%d", &pilihan);
 

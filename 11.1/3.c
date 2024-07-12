@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 #define MAX 30000
 
@@ -15,15 +16,24 @@ void swap(int *, int *);
 int tampilkanMenuSorting();
 int tampilkanMenuUrutan();
 void pilihan(int[], int, int *, int, int);
+void sort(int[], int);
 
 int main()
 {
-    int n = MAX, pembanding = 0, pilihan_sorting, pilihan_urutan;
+    int arr[MAX];
+    int n = MAX;
+
+    generate(arr, n);
+    sort(arr, n);
+
+    return 0;
+}
+
+void sort(int arr[], int n)
+{
+    int pembanding = 0, pilihan_sorting, pilihan_urutan;
     clock_t start, end;
     double waktu;
-
-    int arr[MAX];
-    generate(arr, n);
 
     while (1)
     {
@@ -31,10 +41,7 @@ int main()
         pilihan_urutan = tampilkanMenuUrutan();
 
         int arr_copy[MAX];
-        for (int i = 0; i < n; i++)
-        {
-            arr_copy[i] = arr[i];
-        }
+        memcpy(arr_copy, arr, n * sizeof(int));
 
         start = clock();
 
@@ -46,8 +53,6 @@ int main()
 
         printf("\nWaktu yang dibutuhkan untuk komputasi: %f detik\n", waktu);
     }
-
-    return 0;
 }
 
 void insertionSort(int arr[], int n, int *pembanding, int pilihan_urutan)

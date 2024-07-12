@@ -24,7 +24,7 @@ int main()
 
 void selectionSort(int arr[], int n, int *pembanding)
 {
-    int i, j, kecil;
+    int i, j, kecil, temp;
     for (i = 0; i < n - 1; i++)
     {
         kecil = i;
@@ -34,7 +34,7 @@ void selectionSort(int arr[], int n, int *pembanding)
             if (arr[j] < arr[kecil])
                 kecil = j;
         }
-        int temp = arr[kecil];
+        temp = arr[kecil];
         arr[kecil] = arr[i];
         arr[i] = temp;
         cetak(arr, n, *pembanding);
